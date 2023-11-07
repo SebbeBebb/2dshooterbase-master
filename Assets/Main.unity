@@ -558,6 +558,8 @@ MonoBehaviour:
   speed: 6
   bulletPrefab: {fileID: 1287502262990996, guid: 4dd15c7fe51711c48ba135fef149bbf8,
     type: 3}
+  laserPrefab: {fileID: 6260448462388384727, guid: ae0f3ffa4f1fe624f916cbb6e4250863,
+    type: 3}
   gunPosition: {fileID: 1438924084}
   healthSlider: {fileID: 1107433630}
   healthText: {fileID: 125532258}
@@ -636,7 +638,6 @@ GameObject:
   - component: {fileID: 564525828}
   - component: {fileID: 564525830}
   - component: {fileID: 564525829}
-  - component: {fileID: 564525831}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -701,18 +702,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 564525827}
   m_CullTransparentMesh: 1
---- !u!114 &564525831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564525827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de79097c3a518084d98b6bab4fc72a71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &572328965
 GameObject:
   m_ObjectHideFlags: 0

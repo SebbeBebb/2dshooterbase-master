@@ -29,6 +29,9 @@ public class ShipController : MonoBehaviour
 
     float shotTimer = 0;
     float timeBetweenShots = 0.25f;
+    float ultTimer = 0;
+
+    float timeBetweenUlt = 2.0f;
 
     [SerializeField]
     Slider healthSlider;
@@ -58,16 +61,22 @@ public class ShipController : MonoBehaviour
 
         //Skjutakod
         shotTimer += Time.deltaTime;
-
+        ultTimer += Time.deltaTime;
 
         if (Input.GetAxisRaw("Fire1") > 0 && shotTimer > timeBetweenShots)
         {
             Instantiate(bulletPrefab, gunPosition.position, Quaternion.identity);
             shotTimer = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Q) && maxUlt<=currentUlt){
-            Instantiate(laserPrefab, gunPosition.position, Quaternion.identity);
-            currentUlt = 0;
+        if (Input.GetKeyDown(KeyCode.Q) && currentUlt >= maxUlt){
+            GameObject ultBeam = Instantiate(laserPrefab, gunPosition.position, Quaternion.identity);
+            ultBeam.transform.position += new Vector3(0, ultBeam.GetComponent<Collider2D>().bounds.size.y / 2);
+            ultBeam.transform.parent = transform;
+            if(ultTimer > timeBetweenUlt){
+                Destroy(laserPrefab.gameObject);
+                currentUlt = 0;
+                ultTimer = 0;
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -78,7 +87,6 @@ public class ShipController : MonoBehaviour
             UpdateHealthSlider();
         }
     }
-
     public void UpdateHealthSlider(){
         healthSlider.maxValue = maxHp;
         healthSlider.value = currentHp;
