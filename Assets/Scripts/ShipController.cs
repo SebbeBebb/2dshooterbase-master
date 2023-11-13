@@ -8,10 +8,9 @@ using TMPro;
 
 public class ShipController : MonoBehaviour
 {
-    [SerializeField]
     int maxHp = 100;
     public int currentHp;
-    int minUlt = 0;
+    public int minUlt = 0;
     int maxUlt = 100;
     public int currentUlt;
 
@@ -29,9 +28,6 @@ public class ShipController : MonoBehaviour
 
     float shotTimer = 0;
     float timeBetweenShots = 0.25f;
-    float ultTimer = 0;
-
-    float timeBetweenUlt = 2.0f;
 
     [SerializeField]
     Slider healthSlider;
@@ -61,22 +57,16 @@ public class ShipController : MonoBehaviour
 
         //Skjutakod
         shotTimer += Time.deltaTime;
-        ultTimer += Time.deltaTime;
 
         if (Input.GetAxisRaw("Fire1") > 0 && shotTimer > timeBetweenShots)
         {
             Instantiate(bulletPrefab, gunPosition.position, Quaternion.identity);
             shotTimer = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Q) && currentUlt >= maxUlt){
+        if (Input.GetKeyDown(KeyCode.Q) && currentUlt >= maxUlt){   //Kod som spawnar in Ultimate
             GameObject ultBeam = Instantiate(laserPrefab, gunPosition.position, Quaternion.identity);
             ultBeam.transform.position += new Vector3(0, ultBeam.GetComponent<Collider2D>().bounds.size.y / 2);
-            ultBeam.transform.parent = transform;
-            if(ultTimer > timeBetweenUlt){
-                Destroy(laserPrefab.gameObject);
-                currentUlt = 0;
-                ultTimer = 0;
-            }
+            ultBeam.transform.parent = transform;   //Kod som gör så att Ultimate följer efter Ship
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -95,7 +85,7 @@ public class ShipController : MonoBehaviour
             SceneManager.LoadScene(2);
             }
     }
-    public void UpdateUltimateSlider(){
+    public void UpdateUltimateSlider(){     //Kod som uppdaterar Ultimate slidern
         ultimateSlider.maxValue = maxUlt;
         ultimateSlider.value = currentUlt;
         ultimateText.text = currentUlt + "/" + maxUlt;

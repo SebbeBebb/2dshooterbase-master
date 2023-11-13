@@ -5,18 +5,24 @@ using UnityEngine;
 
 public class LaserController : MonoBehaviour
 {
-    //GameObject target;
-    //int speed = 1000;
-    // Start is called before the first frame update
+    GameObject player;
+    float ultTimer;
+    float timeBetweenUlt = 2.5f;
+
     void Start()
     {
-        
+        player = GameObject.Find("Ship");
     }
 
     // Update is called once per frame
     void Update()
     {
-        // target = GameObject.FindGameObjectWithTag("ship");
-        // transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        ultTimer += Time.deltaTime;
+        if(ultTimer > timeBetweenUlt){      //Kod som förstör Lasern efter att Ultimate har varit igång i 2.5f
+                Destroy(this.gameObject);
+                player.GetComponent<ShipController>().currentUlt = player.GetComponent<ShipController>().minUlt;    //Ändrar currentUlt till minUlt
+                player.GetComponent<ShipController>().UpdateUltimateSlider();   //Updaterar Ultimate slidern
+                ultTimer = 0;
+            }
     }
 }

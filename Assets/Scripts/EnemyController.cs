@@ -36,8 +36,8 @@ public class EnemyController : MonoBehaviour
             Destroy(this.gameObject);
             GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(explosion, 0.3f);
-            if(player.GetComponent<ShipController>().currentUlt != 100 && other.gameObject.tag!="laser"){
-            player.GetComponent<ShipController>().currentUlt += 10;
+            if(player.GetComponent<ShipController>().currentUlt != 100 && other.gameObject.tag!="laser"){   //Kod som lägger till Ultimate progress till slidern
+            player.GetComponent<ShipController>().currentUlt += 5;
             player.GetComponent<ShipController>().UpdateUltimateSlider();
             }
         }

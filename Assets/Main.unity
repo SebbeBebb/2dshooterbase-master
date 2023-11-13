@@ -552,8 +552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0944ad14774bedc46b2877263f07ef7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
   currentHp: 0
+  minUlt: 0
   currentUlt: 0
   speed: 6
   bulletPrefab: {fileID: 1287502262990996, guid: 4dd15c7fe51711c48ba135fef149bbf8,
